@@ -1,0 +1,1 @@
+This is a modified version of Intel(R)'s System Analyzer Utility for Linux, the one provided by Intel(R) from their download center does not work properly, this is just a modifyed version of it to make it work. Intel's Sample Source Code License Agreement is binding if you copy, install or use this.
