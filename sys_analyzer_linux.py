@@ -76,7 +76,7 @@ def run_cmd(cmd):
 def find_library(libfile):
     search_path=os.environ.get("LD_LIBRARY_PATH","/usr/lib64")
     if not ('/usr/lib64' in search_path):
-	search_path+=";/usr/lib64"
+        search_path+=";/usr/lib64"
     paths=search_path.split(";")
 
     found=False
@@ -270,24 +270,22 @@ def does_processor_have_gen_graphics():
             procnum=int(core_vnum)
             archnum=procnum/1000
             if (archnum==4):
-		print_info("Processor arch: Haswell",loglevelcode.INFO)
+                print_info("Processor arch: Haswell",loglevelcode.INFO)
             elif (archnum==5):
-		print_info("Processor arch: Broadwell",loglevelcode.INFO)
+                print_info("Processor arch: Broadwell",loglevelcode.INFO)
             elif (archnum==6): 
                 print_info("Processor arch: Skylake",loglevelcode.INFO)
         except:
             pass
-        
-
     elif (processor_name.find("XEON")>=0):
-	print_info("Processor brand: Xeon",loglevelcode.INFO)
+        print_info("Processor brand: Xeon",loglevelcode.INFO)
         pos=processor_name.find(" V")
         if pos>0:
-	    xeon_vnum=processor_name[pos+1:pos+3]
-	    if ("V3" in xeon_vnum):
-		print_info("Processor arch: Haswell",loglevelcode.INFO)
+            xeon_vnum=processor_name[pos+1:pos+3]
+            if ("V3" in xeon_vnum):
+                print_info("Processor arch: Haswell",loglevelcode.INFO)
             elif ("V4" in xeon_vnum):
-		print_info("Processor arch: Broadwell",loglevelcode.INFO)
+                print_info("Processor arch: Broadwell",loglevelcode.INFO)
             elif ("V5" in xeon_vnum): 
                 print_info("Processor arch: Skylake",loglevelcode.INFO)
 
@@ -362,8 +360,8 @@ def is_OS_media_ready():
     #gcc version
     gcc_version_output=run_cmd("gcc --version")
     if ("not found" in gcc_version_output):
-	print_info("gcc not found",loglevelcode.ERROR)
-	sys.exit(1)
+        print_info("gcc not found",loglevelcode.ERROR)
+        sys.exit(1)
     else:
     	pos=gcc_version_output.find("Copyright")
     	gcc_version_output=gcc_version_output[0:pos-1]
@@ -601,31 +599,31 @@ if __name__ == "__main__":
 
     if len(sys.argv)>1:
         if (sys.argv[1]=="--help"):
-            print "usage: python sys_analyzer_linux.py [-v]"
-            print "-v = verbose"
+            print("usage: python sys_analyzer_linux.py [-v]")
+            print("-v = verbose")
 
         if (sys.argv[1]=="-v"):
             GLOBAL_LOGLEVEL=2
 
     #HW media ready: processor,gpu ID (yes,no,advice)
-    print "--------------------------"
-    print "Hardware readiness checks:"
-    print "--------------------------"
+    print("--------------------------")
+    print("Hardware readiness checks:")
+    print("--------------------------")
     sts=does_processor_have_gen_graphics()
     if (sts<loglevelcode.SUCCESS): sys.exit(1)
 
     #OS media ready: OS,glibc version,gcc version,nomodeset,gpuID (yes, no, advice, gold/generic)
-    print "--------------------------"
-    print "OS readiness checks:"
-    print "--------------------------"    
+    print("--------------------------")
+    print("OS readiness checks:")
+    print("--------------------------")
     sts=is_OS_media_ready()
     if (sts<loglevelcode.SUCCESS): sys.exit(1)
 
 
     #MSS install correctness: vainfo, /dev/dri, check MSDK dirs, check OCL dirs, check MSDK/OCL funcs
-    print "--------------------------"
-    print "Media Server Studio Install:"
-    print "--------------------------"      
+    print("--------------------------")
+    print("Media Server Studio Install:")
+    print("--------------------------")
     #in video group
     out=run_cmd("groups")
     if ("video" in out):
@@ -644,7 +642,7 @@ if __name__ == "__main__":
         print_info("Intel iHD used by libva",loglevelcode.INFO)
     else:
         print_info("libva not loading Intel iHD",loglevelcode.ERROR)
-    
+
     if ("VAEntrypoint" in out):
         print_info("vainfo reports valid codec entry points",loglevelcode.SUCCESS)
     else:
@@ -660,9 +658,9 @@ if __name__ == "__main__":
     check_libdrm()
 
 
-    print "--------------------------"
-    print "Component Smoke Tests:"
-    print "--------------------------"      
+    print("--------------------------")
+    print("Component Smoke Tests:")
+    print("--------------------------")
     check_msdk_api()
 
     check_OCL_caps()
